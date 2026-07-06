@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Project-specific
+transcript.docx
+.superpowers/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
