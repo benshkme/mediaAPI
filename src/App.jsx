@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import ConfigBar from './components/ConfigBar'
+import ClipCard from './components/ClipCard'
 import './App.css'
 
 function makeClip() {
@@ -28,7 +29,20 @@ export default function App() {
     <div className="app">
       <h1>baseEntry.addContent Tool</h1>
       <ConfigBar config={config} onChange={setConfig} />
-      <pre style={{ fontSize: 11, marginTop: 16 }}>{JSON.stringify({ config, clips }, null, 2)}</pre>
+      <div className="clips">
+        {clips.map((clip, i) => (
+          <ClipCard
+            key={clip.id}
+            clip={clip}
+            index={i}
+            onChange={(updated) => setClips(clips.map((c) => c.id === updated.id ? updated : c))}
+            onRemove={() => setClips(clips.filter((c) => c.id !== clip.id))}
+            targetWidth={config.targetWidth}
+            targetHeight={config.targetHeight}
+          />
+        ))}
+      </div>
+      <button type="button" onClick={() => setClips([...clips, makeClip()])}>+ Add Clip</button>
     </div>
   )
 }
