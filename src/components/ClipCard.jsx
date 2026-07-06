@@ -1,5 +1,9 @@
 import { useState } from 'react'
 import BackgroundSection from './sections/BackgroundSection'
+import OverlaysSection from './sections/OverlaysSection'
+import ReplaceBackgroundSection from './sections/ReplaceBackgroundSection'
+import EffectsSection from './sections/EffectsSection'
+import CaptionsSection from './sections/CaptionsSection'
 
 function CollapsibleSection({ title, badge, children }) {
   const [open, setOpen] = useState(false)
@@ -27,16 +31,16 @@ export default function ClipCard({ clip, index, onChange, onRemove, targetWidth,
         <BackgroundSection background={clip.background} onChange={updateBackground} errors={errors.background || {}} />
       </CollapsibleSection>
       <CollapsibleSection title="Overlays" badge={clip.overlays.length}>
-        <p style={{ color: '#888', padding: 8 }}>Overlays — coming in next task</p>
+        <OverlaysSection overlays={clip.overlays} onChange={(overlays) => onChange({ ...clip, overlays })} />
       </CollapsibleSection>
       <CollapsibleSection title="Replace Background" badge={clip.replaceBackground ? 1 : 0}>
-        <p style={{ color: '#888', padding: 8 }}>Replace Background — coming in next task</p>
+        <ReplaceBackgroundSection replaceBackground={clip.replaceBackground} onChange={(rb) => onChange({ ...clip, replaceBackground: rb })} />
       </CollapsibleSection>
       <CollapsibleSection title="Effects" badge={clip.effects.length}>
-        <p style={{ color: '#888', padding: 8 }}>Effects — coming in next task</p>
+        <EffectsSection effects={clip.effects} onChange={(effects) => onChange({ ...clip, effects })} />
       </CollapsibleSection>
-      <CollapsibleSection title="Captions" badge={clip.captions ? 1 : 0}>
-        <p style={{ color: '#888', padding: 8 }}>Captions — coming in next task</p>
+      <CollapsibleSection title={`Captions`} badge={clip.captions ? 1 : 0}>
+        <CaptionsSection captions={clip.captions} onChange={(captions) => onChange({ ...clip, captions })} />
       </CollapsibleSection>
     </div>
   )
