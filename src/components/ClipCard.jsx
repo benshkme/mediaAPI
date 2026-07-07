@@ -4,6 +4,7 @@ import OverlaysSection from './sections/OverlaysSection'
 import ReplaceBackgroundSection from './sections/ReplaceBackgroundSection'
 import EffectsSection from './sections/EffectsSection'
 import CaptionsSection from './sections/CaptionsSection'
+import ClipPreview from './ClipPreview'
 
 function CollapsibleSection({ title, badge, children }) {
   const [open, setOpen] = useState(false)
@@ -27,6 +28,7 @@ export default function ClipCard({ clip, index, onChange, onRemove, targetWidth,
         <strong>Clip {index + 1}</strong>
         <button type="button" onClick={onRemove}>Remove</button>
       </div>
+      <ClipPreview clip={clip} targetWidth={targetWidth} targetHeight={targetHeight} />
       <CollapsibleSection title="Background" badge={clip.background.entryId ? 1 : 0}>
         <BackgroundSection background={clip.background} onChange={updateBackground} errors={errors.background || {}} />
       </CollapsibleSection>
