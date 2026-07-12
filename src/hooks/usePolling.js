@@ -11,8 +11,13 @@ export default function usePolling(fn, intervalMs, enabled) {
 
     const id = setInterval(async () => {
       if (doneRef.current) return
-      const result = await fnRef.current()
-      if (result?.done) {
+      try {
+        const result = await fnRef.current()
+        if (result?.done) {
+          doneRef.current = true
+          clearInterval(id)
+        }
+      } catch {
         doneRef.current = true
         clearInterval(id)
       }

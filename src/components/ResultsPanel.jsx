@@ -60,7 +60,7 @@ export default function ResultsPanel({ submission, onStatusUpdate }) {
         <div className="player-wrapper">
           <iframe
             title="Kaltura Player"
-            src={`${submission.serviceUrl}/p/2/sp/2/embedIframeJs/uiconf_id/23449787/partner_id/2?iframeembed=true&entry_id=${submission.entryId}`}
+            src={`${submission.serviceUrl}/p/${submission.partnerId}/sp/${submission.partnerId}00/embedIframeJs/uiconf_id/${submission.uiconfId}/partner_id/${submission.partnerId}?iframeembed=true&entry_id=${encodeURIComponent(submission.entryId)}`}
             width="640"
             height="360"
             allowFullScreen

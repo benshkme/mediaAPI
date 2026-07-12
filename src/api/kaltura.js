@@ -2,6 +2,7 @@ import { KALTURA_OBJECT_TYPES } from '../constants/kaltura'
 
 export function buildPayload(ks, targetEntryId, clips) {
   const p = {}
+  p['format'] = '1'
   p['ks'] = ks
   p['entryId'] = targetEntryId
   p['resource[objectType]'] = KALTURA_OBJECT_TYPES.OPERATION_RESOURCES
@@ -104,7 +105,7 @@ export async function addContent(serviceUrl, ks, targetEntryId, clips) {
 }
 
 export async function getEntry(serviceUrl, ks, entryId) {
-  const body = new URLSearchParams({ ks, entryId })
+  const body = new URLSearchParams({ ks, entryId, format: '1' })
   const url = `${serviceUrl}/api_v3/service/baseEntry/action/get`
   const res = await fetch(url, { method: 'POST', body })
   return res.json()

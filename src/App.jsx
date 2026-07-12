@@ -31,6 +31,7 @@ function validate(config, clips) {
 export default function App() {
   const [config, setConfig] = useState({
     ks: '', serviceUrl: 'https://www.kaltura.com', targetEntryId: '', targetWidth: '', targetHeight: '',
+    partnerId: '', uiconfId: '23449787',
   })
   const [clips, setClips] = useState([makeClip()])
   const [submission, setSubmission] = useState(null)
@@ -41,7 +42,7 @@ export default function App() {
     setFormErrors(errors)
     if (Object.keys(errors).length > 0) return
 
-    setSubmission({ status: 'submitting', response: null, entryId: config.targetEntryId, serviceUrl: config.serviceUrl, ks: config.ks })
+    setSubmission({ status: 'submitting', response: null, entryId: config.targetEntryId, serviceUrl: config.serviceUrl, ks: config.ks, partnerId: config.partnerId, uiconfId: config.uiconfId })
     try {
       const response = await addContent(config.serviceUrl, config.ks, config.targetEntryId, clips)
       const isError = response?.objectType === 'KalturaAPIException'
@@ -51,7 +52,7 @@ export default function App() {
     }
   }
 
-  const canSubmit = config.ks && config.targetEntryId && clips.some(c => c.background.entryId)
+  const canSubmit = config.ks && config.targetEntryId && clips.length > 0 && clips.every(c => c.background.entryId)
 
   return (
     <div className="app">

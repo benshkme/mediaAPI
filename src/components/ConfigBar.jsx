@@ -11,6 +11,14 @@ export default function ConfigBar({ config, onChange }) {
         <input id="serviceUrl" value={config.serviceUrl} onChange={update('serviceUrl')} />
       </div>
       <div className="field">
+        <label htmlFor="partnerId">Partner ID</label>
+        <input id="partnerId" value={config.partnerId} onChange={update('partnerId')} placeholder="e.g. 1234567" />
+      </div>
+      <div className="field">
+        <label htmlFor="uiconfId">Player UI Conf ID</label>
+        <input id="uiconfId" value={config.uiconfId} onChange={update('uiconfId')} placeholder="e.g. 23449787" />
+      </div>
+      <div className="field">
         <label htmlFor="targetEntryId">Target Entry ID</label>
         <input id="targetEntryId" value={config.targetEntryId} onChange={update('targetEntryId')} placeholder="Draft entry ID" />
       </div>
