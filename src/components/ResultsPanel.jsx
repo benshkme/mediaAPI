@@ -13,7 +13,6 @@ const KALTURA_READY_STATUS = 2
 const KALTURA_ERROR_STATUS = 4
 
 export default function ResultsPanel({ submission, onStatusUpdate }) {
-  const [pollStatus, setPollStatus] = useState(null)
   const [jsonOpen, setJsonOpen] = useState(true)
 
   usePolling(
@@ -24,7 +23,6 @@ export default function ResultsPanel({ submission, onStatusUpdate }) {
         onStatusUpdate('error')
         return { done: true }
       }
-      setPollStatus(entry?.status)
       if (entry?.status === KALTURA_READY_STATUS) { onStatusUpdate('ready'); return { done: true } }
       if (entry?.status === KALTURA_ERROR_STATUS) { onStatusUpdate('error'); return { done: true } }
       return { done: false }
